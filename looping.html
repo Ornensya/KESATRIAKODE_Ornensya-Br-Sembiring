@@ -8,13 +8,49 @@
 <body>
     <script>
         function vowelsAndConsonants(s){
-            console.log(s);
-            // Split digunakan untuk memcecah kata per karakter
-            let huruf = s.split(" ");
-            console.log(huruf);
+            // console.log(s);
+            /* Split digunakan untuk memcecah kata per karakter dan
+            untuk memecah kalimat menjadi per kata dapat ditambah spasi
+            pada tanda petik dua yang terdapat dalam kurung.
+            */
+            let huruf = s.split("");
+            // let huruf = s.split(" ");
+            // console.log(huruf);
+            let vowel = [];
+            let consonant = [];
+            for(let i = 0; i < huruf.length; i++) {
+            // console.log(huruf[i]);
+            if(huruf[i] == "a"){
+                vowel.push(huruf[i]);
+            }else if (huruf[i] == "i") {
+                vowel.push(huruf[i]);   
+            }else if (huruf[i] == "u") {
+                vowel.push(huruf[i]);   
+
+            }else if (huruf[i] == "e") {
+                vowel.push(huruf[i]);   
+
+            }else if (huruf[i] == "o") {
+                vowel.push(huruf[i]);   
+            }else {
+                consonant.push(huruf[i]);
+            }
+            
         }
 
-        vowelsAndConsonants("javascript loops is the best");
+        for (let i = 0; i < vowel.length; i++) {
+            console.log(vowel[i]);    
+        }
+        for (let i = 0; i < consonant.length; i++) {
+            console.log(consonant[i]);
+            
+        }
+        // console.log(vowel);
+        // console.log(consonant);
+    }
+    
+
+        vowelsAndConsonants("javascript loops");
     </script>
 </body>
 </html>
