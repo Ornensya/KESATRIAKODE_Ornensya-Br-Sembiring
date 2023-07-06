@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Perulangan Menggunakan Foreach</title>
+</head>
+<body>
+    <script>
+        let negara = ["Indonesia","Inggris","Perancis","Jerman"];
+
+        // for (let i = 0; i < negara.length; i++) {
+        //     document.write(`<p>${negara[i]}`)   
+        // }
+
+        //Perintah untuk menampilkan array tanpa perlu adanya counter
+        // for (index in negara) {
+        //     document.write(`<p>${negara[index]}`);   
+        // }
+
+        // Menampilkan array menggunakan metode foreach
+        negara.forEach(function (item){
+            document.write(`<p>${item}</p>`);
+            
+        })
+    </script>
+</body>
+</html>
