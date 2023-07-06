@@ -7,59 +7,30 @@
 </head>
 <body>
     <script>
-        let a = prompt("Silahkan Masukkan Bilangan Pertama");
-        let b = prompt("Silahkan Masukkan Bilangan Kedua");
+        let a = Number(prompt("Silahkan Masukkan Bilangan Pertama"));
+        let b = Number(prompt("Silahkan Masukkan Bilangan Kedua"));
         let operasi = prompt("Silahkan pilih operasi Aritmatika dengan memasukkan angka 1-5 :1.Perkalian  2.Penjumlahan 3.Pembagian 4.Pengurangan 5.Sisa Bagi");
         let hasil;
-
+        
         switch (operasi) {
             case "1":
-            // hasil = a * b;
-            document.write(`Hasil Adalah ${a * b}` );
+            document.write(`<h1>Hasil Perkalian Adalah: ${a * b}</h1>`);
                 break;
             case "2":
             hasil = a + b;
-            document.write(`Hasil Adalah ${hasil}` );
+            document.write(`<h1>Hasil Penjumlahan Adalah: ${a + b}</h1>`);
                 break;
             case "3":
-            document.write (`Hasil Adalah ${a / b}` );
+            document.write (`<h1>Hasil Pembagian Adalah: ${a / b}</h1>`);
                 break;
             case "4":
-            document.write(`Hasil Adalah ${a - b}` );
+            document.write(`<h1>Hasil Pengurangan Adalah: ${a - b}</h1>`);
                 break;
             case "5":
-            document.write(`Hasil Adalah ${a % b}` );
+            document.write(`<h1>Hasil Sisa Bagi Adalah : ${a % b}</h1>`);
             default:
             document.write(`<h1>Oops Anda Salah Pilih</h1>`);
-        }
-        // if (hasil == "") {
-        //     document.write(`<h1>Kamu Gagal mendapat Hadiah</h1>`);
-        // }else{
-        //     document.write(`<p>Selamat Anda mendapat Hadiah</p> <h1>${hasil}</h1>`);
-        // }
-
-        // if (pilihan = 1) {
-        //     let hasil = a * b;
-        //     document.write(`<h1>Hasil Perkalian bilangan tersebut adalah : ${hasil}</h1>`);
-        //     // document.write(hasil);   
-        // }else if (pilihan = 2) {
-        //     let hasil2 = a + b;
-        //     document.write(`<h1>Hasil Penjumlahan bilangan tersebut adalah : ${hasil2}</h1>`);
-        // }else if (pilihan = 3) {
-        //     let hasil3 = a / b;
-        //     document.write(`<h1>Hasil Pembagian bilangan tersebut adalah : ${hasil3}</h1>`);
-        //     // document.write(hasil);
-        // }else if (pilihan = 4) {
-        //     let hasil4 = a - b;
-        //     document.write(`<h1>Hasil Pengurangan bilangan tersebut adalah : ${hasil4}</h1>`);
-        //     // document.write(hasil);
-        // }else if (pilihan = 5) {
-        //     let hasil5 = a % b;
-        //     document.write(`<h1>Hasil Sisa Bagi bilangan tersebut adalah : ${hasil5}</h1>`);
-        //     // document.write(hasil);
-        // }else{
-        //     document.write("Silahkan pilih aritmatika yang diingikan")
-        // }
+     }
     </script>
 </body>
 </html>
