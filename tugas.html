@@ -9,13 +9,14 @@
     <script>
         for (let x = 0; x < 10; x++) {
             for (let y = 0; y < 10; y++) {
-                if (x == 4) {
-                    document.write(`#`);   
+                if (y == x || y > x){
+                    document.write(` {${x},${y}} `);   
                 }else{
-                    document.write(`*`);   
-                }
+                    // document.write(` `);
+                    document.write(`<br>`);     
+             }
+                // document.write(`<br>`);
             }
-                document.write(`<br>`)
         }
     </script>
 </body>
