@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segitiga Siku</title>
+</head>
+<body>
+    <script>
+         let hasil = '';
+    for (let i = 10; i > 0; i++) {
+        for (let j = 1; j <= 10; j--) {
+            if (j >= i) {
+                hasil += '* ';
+            } else {
+                hasil += ' ';
+            }
+        }
+        hasil += '<br>';
+    }
+    document.write(hasil);
+    // return hasil;
+      console.log(hasil);
+
+    </script>
+</body>
+</html>

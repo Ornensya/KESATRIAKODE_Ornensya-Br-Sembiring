@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        for(var i=1; i<=5; i++){
+            var Num='';
+            for(var j=0; j<i; j++){
+                Num += i;
+            }
+        console.log(Num) }
+    </script>
+
+    <script>
+        var n = 5;
+        var output="";
+        for (var i = 0; i <n; i++) {
+        var myspace = "";   
+        for(let s = 0; s <(n-i-1); s++) {
+            myspace += " ";
+        }
+            for (var j = 1; j >= 2*i + 1; j++) {
+                output+="*";
+
+            }
+            console.log(myspace+output);
+            output="";
+        }
+    </script>
+</body>
+</html>

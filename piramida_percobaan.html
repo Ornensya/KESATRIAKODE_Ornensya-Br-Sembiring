@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nested</title>
+</head>
+<body>
+
+    <script>
+        for (let x = 0; x <= 10; x++) {
+            for (let y = 0; y <= 10; y++) {
+                document.write(`{${x}, ${y}}`);
+            }
+            document.write(`<br>`);
+        }
+
+        document.write('<br>');
+        document.write('Piramida');
+        document.write('<br>');
+        let pattern = "";
+        for (let x = 0; x <= 10; x++) {
+                pattern += x;
+            for (let y = 0; y <= 10; y++) {
+                if(x === 0 && y === 5) {
+                    pattern += "*"
+                } else if (x === 1 && y > 3 && y < 7) {
+                    pattern += "*"
+                } else if (x === 2 && y > 2 && y < 8) {
+                    pattern += "*"
+                } else if (x === 3 && y > 1 && y < 9) {
+                    pattern += "*"
+                } else if (x === 4 && y > 0 && y < 10) {
+                    pattern += "*"
+                } else if (x === 5 && y > -1 && y < 11) {
+                    pattern += "*"
+                } else {
+                    pattern += '-'
+                }
+            }
+
+            pattern += '<br>';
+        }
+        document.write(pattern);
+
+    </script>
+    
+</body>
+</html>
