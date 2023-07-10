@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    const object = { a: 1, b: 2, c: 3 };
+    const a = "Aku";
+
+for (const key in object) {
+  console.log(`${key}: ${object[key]}`);
+}
+  let i = 0;  
+for (const value of a) {
+  console.log(`${i}: ${value}`);
+  i++;
+}
+for (const value in a) {
+  console.log(`${i}: ${value}`);
+  i++;
+}
+
+// Expected output:
+// "a: 1"
+// "b: 2"
+// "c: 3"
+
+   </script> 
+</body>
+</html>
