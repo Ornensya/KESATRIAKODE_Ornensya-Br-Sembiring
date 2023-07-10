@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      let bulan = [
+        "Januari",
+        "February",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+      ];
+
+      for (let i = 0; i < bulan.length; i++) {
+        document.write(`<p>${bulan[i]}`);
+      }
+
+      for (const key in bulan) {
+        console.log(`${key}: ${bulan[key]}`);
+      }
+
+      let i = 0;
+      for (const value of bulan) {
+        console.log(`${i}: ${value}`);
+        i++;
+      }
+    </script>
+  </body>
+</html>
