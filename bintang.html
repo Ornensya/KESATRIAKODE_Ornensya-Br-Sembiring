@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let n = 9;
+        // let pattern = "";
+        
+        for (let i = 1; i <= n; i++) {
+            let pattern = "";
+    
+                // printing spaces
+                for (let j = 1; j <= 2*(n + 2); j++) {
+                    pattern +=' '
+                }
+                for (let j = n; j> i; j--) {
+                    pattern +=' '
+                }
+                // printing stars
+                for (let k = 1; k <=i; k++) {
+                    pattern +='* '
+                }
+                pattern += '\n';
+                console.log(pattern);
+        }
+
+
+        for (let i = 1; i <= (n+3)/2; i++) {
+            let pattern = "";
+            // printing spaces
+            for (let j = 1; j <= 3*(i-1)+1; j++) {
+                pattern += ' '
+            }
+            // printing star
+            for (let k = 3*(n + 1); k >= 3*(i-1)+1; k--) {
+                pattern += '* '
+            }for (let k = 3*(n - 1); k >= 3*(i+1)-1; k--) {
+                pattern += '* '
+            }
+            pattern += '\n';
+            console.log(pattern);
+        }
+
+        for (let i=1; i<= n/2-1; i++){
+            let pattern = "";
+            for(let j=3*(n+1)/2; j>=i; j--){
+                pattern += ' '
+            }
+            for(let k = 1; k<= (3*n+3)/2 + i; k++){
+                pattern += '* '
+            }
+            for(let k = 1; k>=(3*n+3)/2 - i; k--){
+                pattern += '* '
+            }
+            pattern += '\n';
+            console.log(pattern);
+        }
+        for (let i=1; i<= (n + 1) / 2; i++){
+            let pattern = "";
+            for(let j=(2*n+7)/2; j>=i; j--){
+                pattern += ' '
+            }
+            for(let k = n; k>2 * (i-1); k--){
+                pattern += '* ';
+            }
+            for(let j = 1; j<= n *(i-1)+2; j++){
+                pattern += ' '
+            }for (let k = n; k > 2 * (i-1); k--) {
+                pattern += '* '
+                
+            }
+            pattern += '\n';
+            console.log(pattern);
+        }
+
+
+        
+
+
+    </script>
+</body>
+</html>

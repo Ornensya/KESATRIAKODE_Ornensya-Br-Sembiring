@@ -8,20 +8,97 @@
 <body>
     <script>
          let hasil = '';
-    for (let i = 10; i > 0; i++) {
-        for (let j = 1; j <= 10; j--) {
-            if (j >= i) {
-                hasil += '* ';
-            } else {
-                hasil += ' ';
+         for (let i = 10; i > 0; i--) {
+            for (let j = 1; j <= 10; j++) {
+                if (j >= i) {
+                    hasil += '_ ';
+                } else {
+                    hasil += '';
+                }
             }
+            hasil += '\n';
+            // hasil += '<br>';
+            // console.log(hasil);
         }
-        hasil += '<br>';
-    }
-    document.write(hasil);
-    // return hasil;
-      console.log(hasil);
+        // document.write(hasil);
+        console.log(hasil);
 
+        <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segitiga Siku</title>
+</head>
+
+<body>
+    <script>
+        let hasil = '';
+        for (let i = 10; i > 0; i--) {
+            for (let j = 10; j > 0; j--) {
+                if (j > i) {
+                    hasil += ' ';
+                } else {
+                    hasil += '*';
+                }
+            }
+            hasil += '\n';
+        }
+        console.log(hasil);
+
+        document.write(`<br>`);
+        document.write(`Segitiga siku-siku`)
+        let hasil1 = '';
+        for (let i = 10; i > 0; i--) {
+            for (let j = 1; j <= 10; j++) {
+                if (j >= i) {
+                    hasil1 += '*';
+                } else {
+                    hasil1 += ' ';
+                }
+            }
+            hasil1 += '\n';
+        }
+        
+        console.log(hasil1);
+        document.write(`<br>`);
+        document.write(`Piramida`)
+        let hasil2 = '';
+        for (let i = 10; i > 0; i--) {
+            for (let j = 1; j <= 10; j++) {
+                if (j >= i) {
+                    hasil2 += '*';
+                } else {
+                    hasil2 += ' ';
+                }
+            }
+            hasil1 += '\n';
+        }
+        
+        console.log(hasil2);
+
+        // document.write(`<br>`);
+        // document.write(`Piramida`)
+        // let n = 10;
+        // let hasil2 = '';
+        // for (let i = 1; i <= n; i++) {
+        //     for (let j = 1; j <= n - i; j++) {
+        //         if (j >= i) {
+        //             hasil2 += '*';
+        //         } for (let k = 0; k < 2 * i - 1; k++) {
+        //             hasil2 += ' ';  
+        //         }
+        //     }
+        //     hasil2 += '\n';
+        // }
+        // console.log(hasil2);
+ 
+
+    </script>
+</body>
+
+</html>
     </script>
 </body>
 </html>
