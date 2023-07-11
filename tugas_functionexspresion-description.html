@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* Program function declaration => pada program function declaration harus diawali dengan
+        sebuah fungsi dan parameter */
+
+        function bilanganGenap(number) {
+            return number % 2 === 0;
+        }
+        console.log(bilanganGenap(1));
+        console.log(bilanganGenap(2));
+
+        /* Program function expresion => pada program function expresion nama variabel selalu
+        digunakan sebagai nama fungsi dan parameter
+        
+        Pada function expression baris fungsi yang ada disimpan kedalam suatu variabel */
+        const bilanganGenap1 = function(number){
+            return number % 2 === 0;
+        }
+        console.log(bilanganGenap1(3));
+        console.log(bilanganGenap1(6));
+    </script>
+
+</body>
+</html>
