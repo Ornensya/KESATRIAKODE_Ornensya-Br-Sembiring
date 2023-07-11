@@ -622,10 +622,10 @@
             let mid = totalProducts / 2;
             medianHarga = (sortedProducts[mid - 1].price + sortedProducts[mid].price) / 2;
         } else {
-            let mid = Math.floor(totalProducts / 2);
+            let mid = Math.round(totalProducts / 2);
             medianHarga = sortedProducts[mid].price;
         }
-
+        console.log(sortedProducts);
         console.log("Median Harga Produk: " + medianHarga);
 
 
