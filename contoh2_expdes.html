@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function youAre() {
+        //     function status() {
+        //         return "awesome";
+                
+        //     }
+        //     return status();
+        //     function status() {
+        //         return "cool";
+        //     }
+        // }
+
+        /* Program dibawah ini akan menampilkan error karena function status 
+        belum di deklarasikan */
+        console.log(youAre);
+        console.log(youAre());
+        function youAre() {
+            return status();
+            var status = function() {
+                return "awesome";
+            }
+            var status = function() {
+                return "cool";
+            };
+        }
+
+        // Contoh program function expression
+        console.log(youAre());
+        (function youAre() {
+            console.log("awesome");
+        }) ();
+
+        // Contoh program function Exspression
+        var youAre = function () {
+            return "cool";
+        }();
+        console.log(youAre);
+    </script>
+</body>
+</html>
