@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tugas 6</title>
+  </head>
+
+  <body>
+    <script>
+     /*CONTOH PROGRAM FUNCTION DESCRIPTION => 
+    UNTUK MENAMPILKAN ISI DARI SEBUAH STRING */
+      console.log(`HASIL FUNCTION DESCRIPTION :`);
+      function nama(string) {
+        return `Hallo nama Saya ${string}`;
+      }
+      console.log(nama("Ornensya"));
+
+       /*CONTOH PROGRAM FUNCTION DESCRIPTION => 
+        UNTUK MENGHITUNG JUMLAH SEBUAH NILAI */
+      function tambah(a1, a2) {
+        return a1 + a2;
+      }
+      console.log(tambah(3, 4));
+
+       /*CONTOH PROGRAM FUNCTION DESCRIPTION => 
+        UNTUK MENGHITUNG NILAI RATA-RATA */
+      function rata2Nilai(nilai1, nilai2, nilai3) {
+        var total = nilai1 + nilai2 + nilai3;
+        var rataRata = total / 3;
+        return rataRata.toFixed(2);
+      }
+      console.log(rata2Nilai(80, 90, 75));
+
+        /*CONTOH PROGRAM FUNCTION DESCRIPTION => 
+        UNTUK MENGHITUNG TOTAL HARGA SUATU BARANG */
+      function hitungTotalHarga(namaBarang, jumlah, hargaSatuan, diskon) {
+        var totalHarga = jumlah * hargaSatuan;
+        var hargaSetelahDiskon = (totalHarga * diskon) / 100;
+        return (
+          "Total harga untuk produk " +
+          namaBarang +
+          " dengan jumlah " +
+          jumlah +
+          " " +
+          namaBarang +
+          " adalah " +
+          hargaSetelahDiskon
+        );
+      }
+      console.log(hitungTotalHarga("Buku", 8, 5000, 20));
+
+       /*CONTOH PROGRAM FUNCTION DESCRIPTION => 
+        UNTUK MENAMPILKAN ISI DARI SEBUAH STRING */
+      function sayHello() {
+        return "Hello!";
+      }
+      console.log(sayHello());
+      console.log("\n");
+      console.log(`HASIL FUNCTION EXPRESSION :`);
+      // var sayHello = function () {
+      //     return("Hello!");
+      // };
+
+      // console.log(sayHello());
+
+      // var sayHello = () => {
+      //     return("Hello!");
+      // };
+      // console.log(sayHello());
+
+    /*CONTOH PROGRAM FUNCTION EXPRESSION => 
+        UNTUK MENENTUKAN BILANGAN GENAP */
+      const bilanganGenap = function (number) {
+        return number % 2 === 0;
+      };
+      console.log(bilanganGenap(3));
+      console.log(bilanganGenap(6));
+
+      /*CONTOH PROGRAM FUNCTION EXPRESSION => 
+        UNTUK MENENTUKAN LUAS SEBUAH SEGITIGA */
+      var luasSegitiga = function (alas, tinggi) {
+        return (1 / 2) * alas * tinggi;
+      };
+      console.log(luasSegitiga(10, 5));
+
+      /*CONTOH PROGRAM FUNCTION EXPRESSION => 
+        UNTUK MEMILIH JURUSAN YANG DIINGINKAN */
+      var pilihJurusan = function (pilihan) {
+        if (pilihan === "science") {
+          return "Jurusan Sains";
+        } else if (pilihan === "engineering") {
+          return "Jurusan Teknik";
+        } else if (pilihan === "business") {
+          return "Jurusan Bisnis";
+        } else {
+          return "Jurusan tidak ditemukan";
+        }
+      };
+      console.log(`Jurusan yang dipilih: ${pilihJurusan("business")}`);
+
+      /*CONTOH PROGRAM FUNCTION EXPRESSION => 
+        UNTUK MENENTUKAN HASIL DARI GERBANG LOGIKA AND */
+      function gateAND(input1, input2) {
+        return input1 && input2;
+      }
+      console.log(`Hasil AND: ${gateAND("true", "false")}`);
+      console.log("\n");
+      console.log(`HASIL ARROW FUNCTION EXPRESSION :`);
+
+      /*CONTOH PROGRAM ARROW FUNCTION EXPRESSION => 
+        UNTUK MEMILIH SEPATU YANG DIINGINKAN */
+      const selectShoe = (pilih) => {
+        if (pilih === "casual") {
+          return "Sepatu kasual";
+        } else if (pilih === "sports") {
+          return "Sepatu olahraga";
+        } else if (pilih === "formal") {
+          return "Sepatu formal";
+        } else {
+          return "Jenis sepatu tidak ditemukan";
+        }
+      };
+      console.log(`Jenis sepatu yang dipilih: ${selectShoe("formal")}`);
+
+      /*CONTOH PROGRAM ARROW FUNCTION EXPRESSION => 
+        UNTUK MENENTUKAN HASIL GERBANG LOGIKA OR */
+      const gateOR = (input1, input2) => {
+        return input1 || input2;
+      };
+      console.log(`Hasil OR: ${gateOR("true", "false")}`);
+
+      /*CONTOH PROGRAM ARROW FUNCTION EXPRESSION => 
+        UNTUK MENGHITUNG KELILING SEBUAH TRAPESIUM */
+      const kelilingTrapesium = (sisi1, sisi2, sisi3, sisi4) => {
+        return sisi1 + sisi2 + sisi3 + sisi4;
+      };
+      console.log(`Keliling trapesium: ${kelilingTrapesium(10, 15, 12, 8)}`);
+    </script>
+  </body>
+</html>
