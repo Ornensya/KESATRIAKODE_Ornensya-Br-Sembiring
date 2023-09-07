@@ -1,4 +1,4 @@
- Pertanyaan mengenai materi yang belum dipahami :
+# Pertanyaan mengenai materi yang belum dipahami :
  
 # Jelaskan fungsi dari barang.controller.js dan isi nya itunya diguankan untuk apa
 # Jelaskan fungsi dari barang.entity.js dan isi nya itunya diguankan untuk apa
