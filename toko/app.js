@@ -61,16 +61,22 @@ function penambahanDuaAngka(angka1, angka2) {
   
   }
 
+  // app.post("/gerbanglogika", (req, res) => {
+  //   const { value1, value2 } = req.body;
+  //   const hasil = gerbangOr(
+  //     value1,
+  //     value2,
+  //     (value1, value2) => value1 || value2
+  //   );
+  //   res.json(hasil);
+  // });
+
   app.post("/gerbanglogika", (req, res) => {
     const { value1, value2 } = req.body;
-    const hasil = gerbangAnd(
-      value1,
-      value2,
-      (value1, value2) => value1 && value2
-    );
-    res.json(hasil);
+    gerbangAnd(value1, value2, (hasil) => {
+      res.json({ result: hasil }); 
+    });
   });
-  
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
