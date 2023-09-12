@@ -45,16 +45,19 @@ function penambahanDuaAngka(angka1, angka2) {
 // Fungsi callback gerbang logika AND
   function gerbangAnd(value1, value2, callback) {
     const result = value1 && value2;
+    callback(result);
   }
   
   // Fungsi callback gerbang logika OR
   function gerbangOr(value1, value2, callback) {
     const result = value1 || value2;
+    callback(result);
   }
   
   // Fungsi callback gerbang logika NOT
   function gerbangNot(value, callback) {
     const result = !value;
+    callback(result);
   
   }
 
