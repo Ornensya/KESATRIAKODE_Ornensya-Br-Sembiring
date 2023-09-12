@@ -4,17 +4,23 @@ const {
 
 const getBarang = (query)=> {
     const data = Barang;
-    if (!query) {
+    // console.log(query);
+
+    if (Object.keys(query).length == 0) {
         return data
     }
     const{
-        stok
+        nama
     } = query;
 
-    const filterData = data.filter((item) => item.stok == stok)
+    // const filterData = data.filter((item) => item.stok == stok)
+    const filterDataNama = data.filter((item) => item.nama.toLocaleLowerCase() == nama)
+
+    
     // return data;
     // return "Ini Get Barang";
-    return filterData;
+    // return filterData;
+    return filterDataNama;
 }
 
 const getBarangByID = (id) => {
