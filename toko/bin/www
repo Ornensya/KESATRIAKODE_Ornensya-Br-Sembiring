@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const pool = require("../koneksi.js");
 /**
  * Module dependencies.
  */
@@ -7,6 +8,7 @@
 var app = require('../app');
 var debug = require('debug')('toko:server');
 var http = require('http');
+const { error } = require("console");
 
 /**
  * Get port from environment and store in Express.
@@ -25,15 +27,50 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, () => {
-  console.log(`Application Running on ${port}`)
+server.listen(port, ()=> {
+  console.log(`Application running on ${port}`)
 });
 server.on('error', onError);
 server.on('listening', onListening);
 
+
+function handleError(error){
+ if(error) {
+   console.error("Error connecting to database: "+ error)
+ }
+}
+pool.connect(handleError);
+
+pool.query('SELECT * FROM barang')
+  .then(result => {
+    // Lakukan sesuatu dengan hasil kueri di sini
+    console.log(result.rows);
+  })
+  .catch(err => {
+    console.error('Kesalahan saat menjalankan kueri', err);
+  });
+
+
+//Ornensya
+// pool.connect((error) => {
+//   if (error) {
+//     console.error("Error connecting to database: " + error);
+//   }
+// });
+
+
+// function customCallback(req, res) {
+//   // Your custom logic here
+//   // You can access the request object (req) and send a response (res)
+//   res.send(`This is a custom callback!`);
+// }
+
+// app.get('/callback', customCallback);
+
 /**
  * Normalize a port into a number, string, or false.
  */
+
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
@@ -88,5 +125,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  debug('Listening on ' + bind);
 }

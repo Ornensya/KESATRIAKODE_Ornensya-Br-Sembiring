@@ -45,6 +45,7 @@ function penambahanDuaAngka(angka1, angka2) {
 // Fungsi callback gerbang logika AND
   function gerbangAnd(value1, value2, callback) {
     const result = value1 && value2;
+    console.log(result);
     callback(result);
   }
   
@@ -73,7 +74,7 @@ function penambahanDuaAngka(angka1, angka2) {
 
   app.post("/gerbanglogika", (req, res) => {
     const { value1, value2 } = req.body;
-    gerbangAnd(value1, value2, (hasil) => {
+    gerbangOr(value1, value2, (hasil) => {
       res.json({ result: hasil }); 
     });
   });
