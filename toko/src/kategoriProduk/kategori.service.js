@@ -1,9 +1,9 @@
 const {
-    Barang
-} = require('./barang.entity');
+    Kategori
+} = require('./kategori.entity');
 
-const getBarang = (query)=> {
-    const data = Barang;
+const getKategori = (query)=> {
+    const data = Kategori;
     // console.log(query);
 
     if (Object.keys(query).length == 0) {
@@ -18,13 +18,13 @@ const getBarang = (query)=> {
 
     
     // return data;
-    // return "Ini Get Barang";
+    // return "Ini Get Kategori";
     // return filterData;
     return filterDataNama;
 }
 
-const getBarangByID = (id) => {
-    const data = Barang;
+const getKategoriByID = (id) => {
+    const data = Kategori;
     const findData = data.find((item) => {
         if(item.id == id){
             return item;
@@ -39,24 +39,24 @@ const getBarangByID = (id) => {
     return data;
 }
 
-const postBarang = (input)=> {
-    const data = Barang;
+const postKategori = (input)=> {
+    const data = Kategori;
     data.push({
         id : input.id,
         nama : input.nama,
         stok: input.stok
     });
     return data;
-    // return "Ini Post Barang";
+    // return "Ini Post Kategori";
 }
 
-const updateBarang = (id,input)=> {
+const updateKategori = (id,input)=> {
     const  {
         nama,
         stok
     } = input;
 
-    const data = Barang;
+    const data = Kategori;
     const indexData = data.findIndex((item) => item.id == id);
     if (indexData < 0) {
         return null;
@@ -65,24 +65,24 @@ const updateBarang = (id,input)=> {
     data[indexData].stok = stok;
 
     return data;
-    // return `Ini Update Barang ${id}`;
+    // return `Ini Update Kategori ${id}`;
 }
 
-const deleteBarang = (id)=> {
-    const data = Barang;
+const deleteKategori = (id)=> {
+    const data = Kategori;
     const indexData = data.findIndex((item) => item.id == id);
     if (indexData < 0) {
         return null;
     }
     data.splice(indexData,1)
-    // return `Ini Delete Barang ${id}`;
+    // return `Ini Delete Kategori ${id}`;
 }
 
 module.exports = {
-    getBarang,
-    getBarangByID,
-    postBarang,
-    updateBarang,
-    deleteBarang
+    getKategori,
+    getKategoriByID,
+    postKategori,
+    updateKategori,
+    deleteKategori
 
 };

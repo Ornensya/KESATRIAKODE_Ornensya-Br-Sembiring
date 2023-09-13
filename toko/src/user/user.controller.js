@@ -1,12 +1,4 @@
 const { Router } = require('express');
-const {
-    getBarang,
-    postBarang,
-    updateBarang,
-    deleteBarang,
-    getBarangByID
-} = require('./barang.service');
-
 const router = Router();
 
 router.get('/', (req, res) => {

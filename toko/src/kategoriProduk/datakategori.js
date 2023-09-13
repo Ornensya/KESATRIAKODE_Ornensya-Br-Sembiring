@@ -1,24 +1,12 @@
-const client = require("../../koneksi.js");
-const express = require("express");
-const port = 3002;
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const bodyParser = require("body-parser");
-const app = express();
-app.use(bodyParser.json());
-client.connect(handleError);
-  
-function handleError(error){
-    if(error) {
-      console.error("Error connecting to database: "+ error)
-    }
-   }
-   client.connect(handleError);
-  
+const { json } = require('body-parser');
+const {
+  Router
+} = require('express');
+const client = require('../../koneksi.js');
+const router = Router();
 
 // Rute untuk menjalankan kueri ke database
-app.get('/ambildatakategori', (req, res) => {
+router.get('/ambildatakategori', (req, res) => {
     client.query('SELECT * FROM kategori_produk')
       .then(result => {
         res.json(result.rows);
@@ -29,7 +17,7 @@ app.get('/ambildatakategori', (req, res) => {
       });
   });
 
-  app.post('/tambahkategori', (req, res) => {
+  router.post('/tambahkategori', (req, res) => {
     const { jenis_kategori} = req.body;
   
     // Lakukan validasi data jika diperlukan
@@ -50,7 +38,7 @@ app.get('/ambildatakategori', (req, res) => {
   });
 
 // Rute untuk mengedit data dalam tabel kategori_produk
-app.put('/ubahkategori/:id', (req, res) => {
+router.put('/ubahkategori/:id', (req, res) => {
     const { jenis_kategori } = req.body;
     const id_kategori = req.params.id_kategori; // Ambil ID kategori_produk dari parameter URL
   
@@ -72,7 +60,7 @@ app.put('/ubahkategori/:id', (req, res) => {
   });
 
   // Rute untuk menghapus data dalam tabel kategori_produk
-app.delete('/hapusdatakategori/:id', (req, res) => {
+router.delete('/hapusdatakategori/:id', (req, res) => {
   const id_kategori = req.params.id_kategori; // Ambil ID kategori_produk dari parameter URL
 
   // Lakukan validasi data jika diperlukan
@@ -92,6 +80,5 @@ app.delete('/hapusdatakategori/:id', (req, res) => {
     });
 });
 
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
+
+module.exports = router;

@@ -1,25 +1,12 @@
-const client = require("../../koneksi.js");
-const express = require("express");
-const port = 3002;
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const bodyParser = require("body-parser");
-const app = express();
-app.use(bodyParser.json());
-client.connect(handleError);
-
-  
-function handleError(error){
-    if(error) {
-      console.error("Error connecting to database: "+ error)
-    }
-   }
-   client.connect(handleError);
-  
+const { json } = require('body-parser');
+const {
+  Router
+} = require('express');
+const client = require('../../koneksi.js');
+const router = Router();
 
 // Rute untuk menjalankan kueri ke database
-app.get('/ambildataproduk', (req, res) => {
+router.get('/ambildataproduk', (req, res) => {
     client.query('SELECT * FROM produk')
       .then(result => {
         res.json(result.rows);
@@ -30,7 +17,7 @@ app.get('/ambildataproduk', (req, res) => {
       });
   });
 
-  app.post('/tambahproduk', (req, res) => {
+  router.post('/tambahproduk', (req, res) => {
     const { nama_produk, harga_produk, detail_produk, stok, gambar } = req.body;
   
     // Lakukan validasi data jika diperlukan
@@ -51,7 +38,7 @@ app.get('/ambildataproduk', (req, res) => {
   });
 
 // Rute untuk mengedit data dalam tabel produk
-app.put('/ubahdataproduk/:id', (req, res) => {
+router.put('/ubahdataproduk/:id', (req, res) => {
     const { nama_produk, harga_produk, detail_produk, stok, gambar } = req.body;
     const id_produk = req.params.id_produk; // Ambil ID produk dari parameter URL
   
@@ -73,7 +60,7 @@ app.put('/ubahdataproduk/:id', (req, res) => {
   });
 
   // Rute untuk menghapus data dalam tabel produk
-app.delete('/hapusproduk/:id', (req, res) => {
+router.delete('/hapusproduk/:id', (req, res) => {
   const id_produk = req.params.id_produk; // Ambil ID produk dari parameter URL
 
   // Lakukan validasi data jika diperlukan
@@ -93,6 +80,4 @@ app.delete('/hapusproduk/:id', (req, res) => {
     });
 });
 
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
+module.exports = router;

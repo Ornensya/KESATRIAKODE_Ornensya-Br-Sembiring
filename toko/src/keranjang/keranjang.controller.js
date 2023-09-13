@@ -1,12 +1,4 @@
 const { Router } = require('express');
-const {
-    getBarang,
-    postBarang,
-    updateBarang,
-    deleteBarang,
-    getBarangByID
-} = require('./barang.service');
-
 const router = Router();
 
 router.get('/', (req, res) => {
@@ -14,7 +6,7 @@ router.get('/', (req, res) => {
     return res
     .status(200)
     .json ({
-        data: getBarang(queryParams),
+        data: getKeranjang(queryParams),
         statusCode: 200
     })
 });
@@ -22,7 +14,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const id = req.params.id;
     return res.status(200).json({
-        data : getBarangByID(id),
+        data : getKeranjangByID(id),
         statusCode: 200
     })
 });
@@ -33,7 +25,7 @@ router.post('/', (req,res) => {
     .status(201)
     .json({
         message : "Success Create Data",
-        data: postBarang(input),
+        data: postKeranjang(input),
         statusCode: 201
     })
 });
@@ -43,7 +35,7 @@ router.patch('/:id', (req, res) => {
     const input = req.body;
     return res.status(200).json({
         message :"Success Update Data",
-        data:updateBarang(id, input),
+        data:updateKeranjang(id, input),
         statusCode: 200
     });
 
@@ -52,7 +44,7 @@ router.patch('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
     return res.status(200).json({
-        data : deleteBarang(id),
+        data : deleteKeranjang(id),
         statusCode: 200
     });
 });

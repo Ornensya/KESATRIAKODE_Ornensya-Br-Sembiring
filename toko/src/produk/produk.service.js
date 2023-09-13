@@ -1,9 +1,9 @@
 const {
-    Barang
-} = require('./barang.entity');
+    Produk
+} = require('./produk.entity');
 
-const getBarang = (query)=> {
-    const data = Barang;
+const getProduk = (query)=> {
+    const data = Produk;
     // console.log(query);
 
     if (Object.keys(query).length == 0) {
@@ -18,13 +18,13 @@ const getBarang = (query)=> {
 
     
     // return data;
-    // return "Ini Get Barang";
+    // return "Ini Get Produk";
     // return filterData;
     return filterDataNama;
 }
 
-const getBarangByID = (id) => {
-    const data = Barang;
+const getProdukByID = (id) => {
+    const data = Produk;
     const findData = data.find((item) => {
         if(item.id == id){
             return item;
@@ -39,24 +39,24 @@ const getBarangByID = (id) => {
     return data;
 }
 
-const postBarang = (input)=> {
-    const data = Barang;
+const postProduk = (input)=> {
+    const data = Produk;
     data.push({
         id : input.id,
         nama : input.nama,
         stok: input.stok
     });
     return data;
-    // return "Ini Post Barang";
+    // return "Ini Post Produk";
 }
 
-const updateBarang = (id,input)=> {
+const updateProduk = (id,input)=> {
     const  {
         nama,
         stok
     } = input;
 
-    const data = Barang;
+    const data = Produk;
     const indexData = data.findIndex((item) => item.id == id);
     if (indexData < 0) {
         return null;
@@ -65,24 +65,24 @@ const updateBarang = (id,input)=> {
     data[indexData].stok = stok;
 
     return data;
-    // return `Ini Update Barang ${id}`;
+    // return `Ini Update Produk ${id}`;
 }
 
-const deleteBarang = (id)=> {
-    const data = Barang;
+const deleteProduk = (id)=> {
+    const data = Produk;
     const indexData = data.findIndex((item) => item.id == id);
     if (indexData < 0) {
         return null;
     }
     data.splice(indexData,1)
-    // return `Ini Delete Barang ${id}`;
+    // return `Ini Delete Produk ${id}`;
 }
 
 module.exports = {
-    getBarang,
-    getBarangByID,
-    postBarang,
-    updateBarang,
-    deleteBarang
+    getProduk,
+    getProdukByID,
+    postProduk,
+    updateProduk,
+    deleteProduk
 
 };

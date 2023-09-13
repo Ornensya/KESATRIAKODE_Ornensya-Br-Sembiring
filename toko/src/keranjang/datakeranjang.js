@@ -1,22 +1,12 @@
-const pool = require("./koneksi.js");
-const express = require("express");
-const port = 3002;
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const bodyParser = require("body-parser");
-const app = express();
-  
-function handleError(error){
-    if(error) {
-      console.error("Error connecting to database: "+ error)
-    }
-   }
-   pool.connect(handleError);
-  
+const { json } = require('body-parser');
+const {
+  Router
+} = require('express');
+const client = require('../../koneksi.js');
+const router = Router();
 
 // Rute untuk menjalankan kueri ke database
-app.get('/ambildata', (req, res) => {
+router.get('/ambildata', (req, res) => {
     pool.query('SELECT * FROM barang')
       .then(result => {
         res.json(result.rows);
@@ -27,7 +17,7 @@ app.get('/ambildata', (req, res) => {
       });
   });
 
-  app.post('/tambahProduct', (req, res) => {
+  router.post('/tambahProduct', (req, res) => {
     const { nama_barang, harga, stok } = req.body;
   
     // Lakukan validasi data jika diperlukan
@@ -48,7 +38,7 @@ app.get('/ambildata', (req, res) => {
   });
 
 // Rute untuk mengedit data dalam tabel barang
-app.put('/ubah Product/:id', (req, res) => {
+router.put('/ubah Product/:id', (req, res) => {
     const { nama_barang, harga, stok } = req.body;
     const id = req.params.id; // Ambil ID barang dari parameter URL
   
@@ -70,7 +60,7 @@ app.put('/ubah Product/:id', (req, res) => {
   });
 
   // Rute untuk menghapus data dalam tabel barang
-app.delete('/hapusData/:id', (req, res) => {
+router.delete('/hapusData/:id', (req, res) => {
   const id = req.params.id; // Ambil ID barang dari parameter URL
 
   // Lakukan validasi data jika diperlukan
@@ -89,7 +79,4 @@ app.delete('/hapusData/:id', (req, res) => {
       res.status(500).json({ error: 'Kesalahan saat menghapus data' });
     });
 });
-
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
+module.exports = router;

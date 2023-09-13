@@ -1,12 +1,4 @@
 const { Router } = require('express');
-const {
-    getAdmin,
-    postAdmin,
-    updateAdmin,
-    deleteAdmin,
-    getAdminByID
-} = require('./Admin.service');
-
 const router = Router();
 
 router.get('/', (req, res) => {

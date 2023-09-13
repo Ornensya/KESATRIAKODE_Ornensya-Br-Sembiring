@@ -1,23 +1,12 @@
+const { json } = require('body-parser');
+const {
+  Router
+} = require('express');
 const client = require('../../koneksi.js');
-const express = require("express");
-const port = 3002;
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const bodyParser = require("body-parser");
+const router = Router();
 
-const app = express();
-app.use(bodyParser.json());
-  
-client.connect(handleError);
-
-function handleError(error) {
-  if (error) {
-    console.error('Error connecting to database: ' + error);
-  }
-}
 // Rute untuk menjalankan kueri ke database
-app.get('/ambildataadmin', (req, res) => {
+router.get('/ambildataadmin', (req, res) => {
     client.query('SELECT * FROM admin')
       .then(result => {
         res.json(result.rows);
@@ -28,7 +17,7 @@ app.get('/ambildataadmin', (req, res) => {
       });
   });
 
-  app.post('/tambahdataadmin', (req, res) => {
+  router.post('/tambahdataadmin', (req, res) => {
     const { username, password } = req.body;
   
  
@@ -48,7 +37,7 @@ app.get('/ambildataadmin', (req, res) => {
   });
 
 // Rute untuk mengedit data dalam tabel barang
-app.put('/ubahdataadmin/:id', (req, res) => {
+router.put('/ubahdataadmin/:id', (req, res) => {
     const { username, password } = req.body;
     const id_admin = req.params.id_admin; // Ambil ID barang dari parameter URL
   
@@ -70,7 +59,7 @@ app.put('/ubahdataadmin/:id', (req, res) => {
   });
 
   // Rute untuk menghapus data dalam tabel barang
-app.delete('/hapusdataadmin/:id', (req, res) => {
+router.delete('/hapusdataadmin/:id', (req, res) => {
   const id = req.params.id; // Ambil ID barang dari parameter URL
 
   // Lakukan validasi data jika diperlukan
@@ -90,6 +79,4 @@ app.delete('/hapusdataadmin/:id', (req, res) => {
     });
 });
 
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
+module.exports = router;

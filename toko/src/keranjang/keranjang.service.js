@@ -1,9 +1,9 @@
 const {
-    Barang
-} = require('./barang.entity');
+    Keranjang
+} = require('./keranjang.entity');
 
-const getBarang = (query)=> {
-    const data = Barang;
+const getKeranjang = (query)=> {
+    const data = Keranjang;
     // console.log(query);
 
     if (Object.keys(query).length == 0) {
@@ -18,13 +18,13 @@ const getBarang = (query)=> {
 
     
     // return data;
-    // return "Ini Get Barang";
+    // return "Ini Get Keranjang";
     // return filterData;
     return filterDataNama;
 }
 
-const getBarangByID = (id) => {
-    const data = Barang;
+const getKeranjangByID = (id) => {
+    const data = Keranjang;
     const findData = data.find((item) => {
         if(item.id == id){
             return item;
@@ -39,24 +39,24 @@ const getBarangByID = (id) => {
     return data;
 }
 
-const postBarang = (input)=> {
-    const data = Barang;
+const postKeranjang = (input)=> {
+    const data = Keranjang;
     data.push({
         id : input.id,
         nama : input.nama,
         stok: input.stok
     });
     return data;
-    // return "Ini Post Barang";
+    // return "Ini Post Keranjang";
 }
 
-const updateBarang = (id,input)=> {
+const updateKeranjang = (id,input)=> {
     const  {
         nama,
         stok
     } = input;
 
-    const data = Barang;
+    const data = Keranjang;
     const indexData = data.findIndex((item) => item.id == id);
     if (indexData < 0) {
         return null;
@@ -65,24 +65,24 @@ const updateBarang = (id,input)=> {
     data[indexData].stok = stok;
 
     return data;
-    // return `Ini Update Barang ${id}`;
+    // return `Ini Update Keranjang ${id}`;
 }
 
-const deleteBarang = (id)=> {
-    const data = Barang;
+const deleteKeranjang = (id)=> {
+    const data = Keranjang;
     const indexData = data.findIndex((item) => item.id == id);
     if (indexData < 0) {
         return null;
     }
     data.splice(indexData,1)
-    // return `Ini Delete Barang ${id}`;
+    // return `Ini Delete Keranjang ${id}`;
 }
 
 module.exports = {
-    getBarang,
-    getBarangByID,
-    postBarang,
-    updateBarang,
-    deleteBarang
+    getKeranjang,
+    getKeranjangByID,
+    postKeranjang,
+    updateKeranjang,
+    deleteKeranjang
 
 };

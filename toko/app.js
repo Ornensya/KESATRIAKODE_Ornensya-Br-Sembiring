@@ -7,6 +7,12 @@ const bodyParse = require('body-parser');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const barangRouter = require('./src/barang/barang.controller')
+const barangNewRouter = require('./src/barang/dataDatabase')
+const keranjangNewRouter = require('./src/keranjang/datakeranjang')
+const produkNewRouter = require('./src/produk/dataproduk')
+const userNewRouter = require('./src/user/datauser')
+const adminNewRouter = require('./src/admin/dataAdmin')
+const kategoriNewRouter = require('./src/kategoriProduk/datakategori')
 
 const app = express();
 app.use(bodyParse.urlencoded({ extended : false}));
@@ -82,5 +88,10 @@ function penambahanDuaAngka(angka1, angka2) {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/barang', barangRouter);
-
+app.use('/barangNew', barangNewRouter);
+app.use('/keranjangNew', keranjangNewRouter);
+app.use('/produkNew', produkNewRouter);
+app.use('/userNew', userNewRouter);
+app.use('/adminNew', adminNewRouter);
+app.use('/kategoriNew', kategoriNewRouter);
 module.exports = app;

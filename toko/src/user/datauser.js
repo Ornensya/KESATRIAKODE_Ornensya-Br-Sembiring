@@ -1,23 +1,12 @@
+const { json } = require('body-parser');
+const {
+  Router
+} = require('express');
 const client = require('../../koneksi.js');
-const express = require("express");
-const port = 3002;
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const bodyParser = require("body-parser");
+const router = Router();
 
-const app = express();
-app.use(bodyParser.json());
-  
-client.connect(handleError);
-
-function handleError(error) {
-  if (error) {
-    console.error('Error connecting to database: ' + error);
-  }
-}
 // Rute untuk menjalankan kueri ke database
-app.get('/ambildatauser', (req, res) => {
+router.get('/ambildatauser', (req, res) => {
     client.query('SELECT * FROM pengguna')
       .then(result => {
         res.json(result.rows);
@@ -28,7 +17,7 @@ app.get('/ambildatauser', (req, res) => {
       });
   });
 
-  app.post('/tambahdatauser', (req, res) => {
+  router.post('/tambahdatauser', (req, res) => {
     const { nama_pengguna ,username, password } = req.body;
   
  
@@ -48,7 +37,7 @@ app.get('/ambildatauser', (req, res) => {
   });
 
 // Rute untuk mengedit data dalam tabel barang
-app.put('/ubahdatauser/:id', (req, res) => {
+router.put('/ubahdatauser/:id', (req, res) => {
     const { username, password } = req.body;
     const id_pengguna = req.params.id_pengguna; // Ambil ID barang dari parameter URL
   
@@ -70,7 +59,7 @@ app.put('/ubahdatauser/:id', (req, res) => {
   });
 
   // Rute untuk menghapus data dalam tabel barang
-app.delete('/hapusdatauser/:id', (req, res) => {
+router.delete('/hapusdatauser/:id', (req, res) => {
   const id_pengguna = req.params.id_pengguna; // Ambil ID barang dari parameter URL
 
   // Lakukan validasi data jika diperlukan
@@ -90,6 +79,4 @@ app.delete('/hapusdatauser/:id', (req, res) => {
     });
 });
 
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
+module.exports = router;
