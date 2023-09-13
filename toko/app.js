@@ -81,8 +81,8 @@ function penambahanDuaAngka(angka1, angka2) {
   app.post("/gerbanglogika", (req, res) => {
     const { value1, value2 } = req.body;
     gerbangOr(value1, value2, (hasil) => {
-      res.json({ result: hasil }); 
-    });
+      res.json({ result: hasil });
+  });
   });
 
 app.use('/', indexRouter);
