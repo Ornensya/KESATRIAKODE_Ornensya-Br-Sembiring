@@ -39,13 +39,13 @@ router.get('/ambildataadmin', (req, res) => {
 // Rute untuk mengedit data dalam tabel barang
 router.put('/ubahdataadmin/:id', (req, res) => {
     const { username, password } = req.body;
-    const id_admin = req.params.id_admin; // Ambil ID barang dari parameter URL
+    const id = req.params.id; // Ambil ID barang dari parameter URL
   
     // Lakukan validasi data jika diperlukan
   
     const query = {
       text: 'UPDATE admin SET username = $1, password = $2 WHERE id_admin = $3',
-      values: [username, password, id_admin],
+      values: [username, password, id],
     };
   
     client.query(query)
@@ -66,7 +66,7 @@ router.delete('/hapusdataadmin/:id', (req, res) => {
 
   const query = {
     text: 'DELETE FROM admin WHERE id_admin = $1',
-    values: [id_admin],
+    values: [id],
   };
 
   client.query(query)

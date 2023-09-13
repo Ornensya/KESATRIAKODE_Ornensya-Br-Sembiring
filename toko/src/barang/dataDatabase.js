@@ -7,7 +7,7 @@ const router = Router();
   
 
 // Rute untuk menjalankan kueri ke database
-router.get('/ambildata', (req, res) => {
+router.get('/ambildatabarang', (req, res) => {
     pool.query('SELECT * FROM barang')
       .then(result => {
         res.json(result.rows);

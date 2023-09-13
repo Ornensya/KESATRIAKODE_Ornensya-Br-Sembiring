@@ -40,13 +40,13 @@ router.get('/ambildataproduk', (req, res) => {
 // Rute untuk mengedit data dalam tabel produk
 router.put('/ubahdataproduk/:id', (req, res) => {
     const { nama_produk, harga_produk, detail_produk, stok, gambar } = req.body;
-    const id_produk = req.params.id_produk; // Ambil ID produk dari parameter URL
+    const id = req.params.id; // Ambil ID produk dari parameter URL
   
     // Lakukan validasi data jika diperlukan
   
     const query = {
       text: 'UPDATE produk SET nama_produk = $1, harga_produk = $2, detail_produk = $3, stok = $4, gambar = $5 WHERE id_produk = $6',
-      values: [nama_produk, harga_produk, detail_produk, stok, gambar, id_produk],
+      values: [nama_produk, harga_produk, detail_produk, stok, gambar, id],
     };
   
     client.query(query)
@@ -61,13 +61,13 @@ router.put('/ubahdataproduk/:id', (req, res) => {
 
   // Rute untuk menghapus data dalam tabel produk
 router.delete('/hapusproduk/:id', (req, res) => {
-  const id_produk = req.params.id_produk; // Ambil ID produk dari parameter URL
+  const id = req.params.id; // Ambil ID produk dari parameter URL
 
   // Lakukan validasi data jika diperlukan
 
   const query = {
     text: 'DELETE FROM produk WHERE id_produk = $1',
-    values: [id_produk],
+    values: [id],
   };
 
   client.query(query)

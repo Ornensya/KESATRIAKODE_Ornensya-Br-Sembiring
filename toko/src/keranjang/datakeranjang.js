@@ -6,8 +6,8 @@ const client = require('../../koneksi.js');
 const router = Router();
 
 // Rute untuk menjalankan kueri ke database
-router.get('/ambildata', (req, res) => {
-    pool.query('SELECT * FROM barang')
+router.get('/ambildatakeranjang', (req, res) => {
+    client.query('SELECT * FROM keranjang')
       .then(result => {
         res.json(result.rows);
       })
@@ -17,14 +17,14 @@ router.get('/ambildata', (req, res) => {
       });
   });
 
-  router.post('/tambahProduct', (req, res) => {
-    const { nama_barang, harga, stok } = req.body;
+  router.post('/tambahkeranjang', (req, res) => {
+    const { nama_produk, harga_produk, jumlah } = req.body;
   
     // Lakukan validasi data jika diperlukan
   
     const query = {
-      text: 'INSERT INTO barang (nama_barang, harga, stok) VALUES ($1, $2, $3)',
-      values: [nama_barang, harga, stok],
+      text: 'INSERT INTO keranjang (nama_produk, harga_produk, jumlah) VALUES ($1, $2, $3)',
+      values: [nama_produk, harga_produk, jumlah],
     };
   
     client.query(query)
@@ -38,15 +38,15 @@ router.get('/ambildata', (req, res) => {
   });
 
 // Rute untuk mengedit data dalam tabel barang
-router.put('/ubah Product/:id', (req, res) => {
-    const { nama_barang, harga, stok } = req.body;
+router.put('/ubahkeranjang/:id', (req, res) => {
+    const { nama_produk, harga_produk, jumlah } = req.body;
     const id = req.params.id; // Ambil ID barang dari parameter URL
   
     // Lakukan validasi data jika diperlukan
   
     const query = {
-      text: 'UPDATE barang SET nama_barang = $1, harga = $2, stok = $3 WHERE id = $4',
-      values: [nama_barang, harga, stok, id],
+      text: 'UPDATE keranjang SET nama_produk = $1, harga_produk = $2, jumlah = $3 WHERE id_produk = $4',
+      values: [nama_produk, harga_produk, jumlah, id],
     };
   
     client.query(query)
@@ -60,17 +60,17 @@ router.put('/ubah Product/:id', (req, res) => {
   });
 
   // Rute untuk menghapus data dalam tabel barang
-router.delete('/hapusData/:id', (req, res) => {
+router.delete('/hapusdatakeranjang/:id', (req, res) => {
   const id = req.params.id; // Ambil ID barang dari parameter URL
 
   // Lakukan validasi data jika diperlukan
 
   const query = {
-    text: 'DELETE FROM barang WHERE id = $1',
+    text: 'DELETE FROM keranjang WHERE id_produk = $1',
     values: [id],
   };
 
-  pool.query(query)
+  client.query(query)
     .then(() => {
       res.json({ message: 'Data berhasil dihapus' });
     })

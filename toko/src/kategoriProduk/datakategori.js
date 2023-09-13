@@ -40,13 +40,13 @@ router.get('/ambildatakategori', (req, res) => {
 // Rute untuk mengedit data dalam tabel kategori_produk
 router.put('/ubahkategori/:id', (req, res) => {
     const { jenis_kategori } = req.body;
-    const id_kategori = req.params.id_kategori; // Ambil ID kategori_produk dari parameter URL
+    const id = req.params.id; // Ambil ID kategori_produk dari parameter URL
   
     // Lakukan validasi data jika diperlukan
   
     const query = {
       text: 'UPDATE kategori_produk SET jenis_kategori = $1 WHERE id_kategori = $2',
-      values: [jenis_kategori, id_kategori],
+      values: [jenis_kategori, id],
     };
   
     client.query(query)
@@ -61,13 +61,13 @@ router.put('/ubahkategori/:id', (req, res) => {
 
   // Rute untuk menghapus data dalam tabel kategori_produk
 router.delete('/hapusdatakategori/:id', (req, res) => {
-  const id_kategori = req.params.id_kategori; // Ambil ID kategori_produk dari parameter URL
+  const id = req.params.id; // Ambil ID kategori_produk dari parameter URL
 
   // Lakukan validasi data jika diperlukan
 
   const query = {
     text: 'DELETE FROM kategori_produk WHERE id_kategori = $1',
-    values: [id_kategori],
+    values: [id],
   };
 
   client.query(query)
