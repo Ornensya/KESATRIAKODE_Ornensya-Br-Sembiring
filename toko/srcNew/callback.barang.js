@@ -1,6 +1,6 @@
 const client = require('../koneksiCallback.js');
 const express = require("express");
-const port = 3000;
+const port = 3001;
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -28,14 +28,6 @@ app.get('/ambilData', (req, res) => {
       }
     });
   });
-
-/* Disini callback function digunakan untuk menangani hasil atau kesalahan yang mungkin terjadi saat 
-menjalankan query database dan untuk mengirimkan respons HTTP yang sesuai. 
-Jika query database berhasil tanpa kesalahan, maka callback function yang menggunakan (err) => { ... } akan 
-mengeksekusi kode dalam blok else { ... }. Dalam kasus ini, kode tersebut mengirimkan respons JSON yang 
-berisi pesan "Data berhasil ditambahkan" yang menunjukkan bahwa operasi penambahan data berhasil. 
-Jika gagal maka sebaliknya.
-*/
 
 // Rute untuk menjalankan neambah data produk ke database
 app.post('/addData', (req, res) => {
@@ -75,6 +67,26 @@ app.put('/editData/:id', (req, res) => {
     }
   });
 });
+
+// Rute untuk menghapus data dalam tabel barang berdasarkan ID
+app.delete('/hapusData/:id', (req, res) => {
+    const id = req.params.id; // Ambil ID barang dari parameter URL
+  
+    const query = {
+      text: 'DELETE FROM barang WHERE id = $1',
+      values: [id],
+    };
+  
+    client.query(query, (err) => {
+      if (err) {
+        console.error('Kesalahan saat menghapus data', err);
+        res.status(500).json({ error: 'Kesalahan saat menghapus data' });
+      } else {
+        res.json({ message: 'Data berhasil dihapus' });
+      }
+    });
+  });
+  
 
   
 app.listen(port, () => {

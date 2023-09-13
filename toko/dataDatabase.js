@@ -1,6 +1,6 @@
 const pool = require("./koneksi.js");
 const express = require("express");
-const port = 3000;
+const port = 3002;
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -14,15 +14,6 @@ function handleError(error){
    }
    pool.connect(handleError);
   
-//   pool.query('SELECT * FROM barang')
-//     .then(result => {
-//       // Lakukan sesuatu dengan hasil kueri di sini
-//       console.log(result.rows);
-//     })
-//     .catch(err => {
-//       console.error('Kesalahan saat menjalankan kueri', err);
-//     });
-
 
 // Rute untuk menjalankan kueri ke database
 app.get('/ambildata', (req, res) => {
@@ -77,12 +68,28 @@ app.put('/ubah Product/:id', (req, res) => {
         res.status(500).json({ error: 'Kesalahan saat mengedit data' });
       });
   });
-  
-  
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+
+  // Rute untuk menghapus data dalam tabel barang
+app.delete('/hapusData/:id', (req, res) => {
+  const id = req.params.id; // Ambil ID barang dari parameter URL
+
+  // Lakukan validasi data jika diperlukan
+
+  const query = {
+    text: 'DELETE FROM barang WHERE id = $1',
+    values: [id],
+  };
+
+  pool.query(query)
+    .then(() => {
+      res.json({ message: 'Data berhasil dihapus' });
+    })
+    .catch(err => {
+      console.error('Kesalahan saat menghapus data', err);
+      res.status(500).json({ error: 'Kesalahan saat menghapus data' });
+    });
 });
-  
+
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
     });
