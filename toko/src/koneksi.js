@@ -9,4 +9,4 @@ const pool = new Pool({
   port: 5432, // Port default PostgreSQL
 });
 
-module.exports = pool;
+module.exports = pool;
