@@ -17,7 +17,7 @@ router.get('/ambildataproduk', (req, res) => {
       });
   });
 
-  router.post('/tambahproduk', (req, res) => {
+  router.post('/tambahdataproduk', (req, res) => {
     const { nama_produk, harga_produk, detail_produk, stok, gambar } = req.body;
   
     // Lakukan validasi data jika diperlukan
@@ -60,7 +60,7 @@ router.put('/ubahdataproduk/:id', (req, res) => {
   });
 
   // Rute untuk menghapus data dalam tabel produk
-router.delete('/hapusproduk/:id', (req, res) => {
+router.delete('/hapusdataproduk/:id', (req, res) => {
   const id = req.params.id; // Ambil ID produk dari parameter URL
 
   // Lakukan validasi data jika diperlukan

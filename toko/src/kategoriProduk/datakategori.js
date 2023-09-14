@@ -17,7 +17,7 @@ router.get('/ambildatakategori', (req, res) => {
       });
   });
 
-  router.post('/tambahkategori', (req, res) => {
+  router.post('/tambahdatakategori', (req, res) => {
     const { jenis_kategori} = req.body;
   
     // Lakukan validasi data jika diperlukan
@@ -38,7 +38,7 @@ router.get('/ambildatakategori', (req, res) => {
   });
 
 // Rute untuk mengedit data dalam tabel kategori_produk
-router.put('/ubahkategori/:id', (req, res) => {
+router.put('/ubahdatakategori/:id', (req, res) => {
     const { jenis_kategori } = req.body;
     const id = req.params.id; // Ambil ID kategori_produk dari parameter URL
   

@@ -17,7 +17,7 @@ router.get('/ambildatakeranjang', (req, res) => {
       });
   });
 
-  router.post('/tambahkeranjang', (req, res) => {
+  router.post('/tambahdatakeranjang', (req, res) => {
     const { nama_produk, harga_produk, jumlah } = req.body;
   
     // Lakukan validasi data jika diperlukan
@@ -38,7 +38,7 @@ router.get('/ambildatakeranjang', (req, res) => {
   });
 
 // Rute untuk mengedit data dalam tabel barang
-router.put('/ubahkeranjang/:id', (req, res) => {
+router.put('/ubahdatakeranjang/:id', (req, res) => {
     const { nama_produk, harga_produk, jumlah } = req.body;
     const id = req.params.id; // Ambil ID barang dari parameter URL
   
