@@ -1,9 +1,29 @@
 const { json } = require('body-parser');
-const {
-  Router
-} = require('express');
+const { Router} = require('express');
 const client = require('../../koneksi.js');
 const router = Router();
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const app = require('../../app.js');
+
+// Middleware untuk memeriksa token
+function authenticateToken(req, res, next) {
+  const token = req.header('Authorization'); // Anda bisa mengirim token dalam header 'Authorization'
+  // const token = req.body.token;
+
+  if (!token) {
+    return res.status(401).json({ message: 'Akses ditolak. Token tidak ada.' });
+  }
+
+  jwt.verify(token, 'coba', (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: 'Akses ditolak. Token tidak valid.' });
+    }
+    req.user = user;
+    console.log(user);
+    next(); // Lanjutkan ke middleware atau handler berikutnya
+  });
+}
 
 // Rute untuk menjalankan kueri ke database
 router.get('/ambildatakategori', (req, res) => {
@@ -17,7 +37,7 @@ router.get('/ambildatakategori', (req, res) => {
       });
   });
 
-  router.post('/tambahdatakategori', (req, res) => {
+  router.post('/tambahdatakategori', authenticateToken, (req, res) => {
     const { jenis_kategori} = req.body;
   
     // Lakukan validasi data jika diperlukan
@@ -38,7 +58,7 @@ router.get('/ambildatakategori', (req, res) => {
   });
 
 // Rute untuk mengedit data dalam tabel kategori_produk
-router.put('/ubahdatakategori/:id', (req, res) => {
+router.put('/ubahdatakategori/:id', authenticateToken, (req, res) => {
     const { jenis_kategori } = req.body;
     const id = req.params.id; // Ambil ID kategori_produk dari parameter URL
   
@@ -60,7 +80,7 @@ router.put('/ubahdatakategori/:id', (req, res) => {
   });
 
   // Rute untuk menghapus data dalam tabel kategori_produk
-router.delete('/hapusdatakategori/:id', (req, res) => {
+router.delete('/hapusdatakategori/:id', authenticateToken, (req, res) => {
   const id = req.params.id; // Ambil ID kategori_produk dari parameter URL
 
   // Lakukan validasi data jika diperlukan

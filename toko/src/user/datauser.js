@@ -22,7 +22,7 @@ router.get('/ambildatauser', (req, res) => {
   router.post('/tambahdatauser', (req, res) => {
     const { nama_pengguna ,username, password } = req.body;
   
- 
+
     const query = {
       text: 'INSERT INTO pengguna (nama_pengguna ,username, password) VALUES ($1, $2, $3)',
       values: [nama_pengguna ,username, password],
@@ -94,10 +94,7 @@ router.post('/register', async (req, res) => {
       [nama_pengguna, username, hashedPassword]
     );
 
-    const userId = result.rows[0].id;
-    const token = jwt.sign({ userId }, 'pelatihan900');
-
-    res.status(201).json({ token });
+    res.status(201).json({ message: 'Pendaftaran Berhasil' });
   } catch (error) {
     console.error('Error during registration:', error);
     res.status(500).send('Internal Server Error');
@@ -125,12 +122,34 @@ router.post('/login', async (req, res) => {
       return res.status(401).send('Invalid credentials');
     }
 
-    const token = jwt.sign({ userId: user.id_pengguna }, 'pelatihan');
-
-    res.json({ token });
+    res.json({ message: 'Login Berhasil' });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).send('Internal Server Error');
   }
 });
+// // Middleware untuk memeriksa token
+// function authenticateToken(req, res, next) {
+//   const token = req.header('Authorization'); // Anda bisa mengirim token dalam header 'Authorization'
+//   // const token = req.body.token;
+
+//   if (!token) {
+//     return res.status(401).json({ message: 'Akses ditolak. Token tidak ada.' });
+//   }
+
+//   jwt.verify(token, 'coba', (err, user) => {
+//     if (err) {
+//       return res.status(403).json({ message: 'Akses ditolak. Token tidak valid.' });
+//     }
+//     req.user = user;
+//     next(); // Lanjutkan ke middleware atau handler berikutnya
+//   });
+// }
+
+// // Sekarang Anda bisa menggunakan middleware ini untuk membatasi akses ke endpoint tertentu
+// router.post('/data-rahasia', authenticateToken, (req, res) => {
+//   // Hanya pengguna dengan token yang valid yang dapat mengakses endpoint ini
+//   res.json({ message: 'Ini adalah data rahasia.' });
+// });
+
 module.exports = router;

@@ -1,14 +1,34 @@
 const { json } = require('body-parser');
-const {
-  Router
-} = require('express');
+const { Router} = require('express');
 const client = require('../../koneksi.js');
 const router = Router();
-  
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const app = require('../../app.js');
+
+
+// Middleware untuk memeriksa token
+function authenticateToken(req, res, next) {
+  const token = req.header('Authorization'); // Anda bisa mengirim token dalam header 'Authorization'
+  // const token = req.body.token;
+
+  if (!token) {
+    return res.status(401).json({ message: 'Akses ditolak. Token tidak ada.' });
+  }
+
+  jwt.verify(token, 'coba', (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: 'Akses ditolak. Token tidak valid.' });
+    }
+    req.user = user;
+    console.log(user);
+    next(); // Lanjutkan ke middleware atau handler berikutnya
+  });
+}
 
 // Rute untuk menjalankan kueri ke database
 router.get('/ambildatabarang', (req, res) => {
-    pool.query('SELECT * FROM barang')
+    client.query('SELECT * FROM barang')
       .then(result => {
         res.json(result.rows);
       })
@@ -18,7 +38,9 @@ router.get('/ambildatabarang', (req, res) => {
       });
   });
 
-  router.post('/tambahProduct', (req, res) => {
+
+
+  router.post('/tambahdata', authenticateToken, (req, res) => {
     const { nama_barang, harga, stok } = req.body;
   
     // Lakukan validasi data jika diperlukan
@@ -38,8 +60,12 @@ router.get('/ambildatabarang', (req, res) => {
       });
   });
 
+
+
+
+
 // Rute untuk mengedit data dalam tabel barang
-router.put('/ubah Product/:id', (req, res) => {
+router.put('/ubahdata/:id', (req, res) => {
     const { nama_barang, harga, stok } = req.body;
     const id = req.params.id; // Ambil ID barang dari parameter URL
   
@@ -61,7 +87,7 @@ router.put('/ubah Product/:id', (req, res) => {
   });
 
   // Rute untuk menghapus data dalam tabel barang
-router.delete('/hapusData/:id', (req, res) => {
+router.delete('/hapusdata/:id', (req, res) => {
   const id = req.params.id; // Ambil ID barang dari parameter URL
 
   // Lakukan validasi data jika diperlukan
@@ -71,7 +97,7 @@ router.delete('/hapusData/:id', (req, res) => {
     values: [id],
   };
 
-  pool.query(query)
+  client.query(query)
     .then(() => {
       res.json({ message: 'Data berhasil dihapus' });
     })

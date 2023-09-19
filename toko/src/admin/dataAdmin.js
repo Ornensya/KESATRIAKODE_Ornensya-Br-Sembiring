@@ -1,9 +1,10 @@
 const { json } = require('body-parser');
-const {
-  Router
-} = require('express');
+const { Router} = require('express');
 const client = require('../../koneksi.js');
 const router = Router();
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const app = require('../../app.js');
 
 // Rute untuk menjalankan kueri ke database
 router.get('/ambildataadmin', (req, res) => {
@@ -19,8 +20,7 @@ router.get('/ambildataadmin', (req, res) => {
 
   router.post('/tambahdataadmin', (req, res) => {
     const { username, password } = req.body;
-  
- 
+
     const query = {
       text: 'INSERT INTO admin (username, password) VALUES ($1, $2)',
       values: [username, password],
@@ -35,6 +35,27 @@ router.get('/ambildataadmin', (req, res) => {
         res.status(500).json({ error: 'Kesalahan saat mengimput data' });
       });
   });
+
+  // Endpoint untuk pendaftaran pengguna
+router.post('/register', async (req, res) => {
+  const { username, password } = req.body;
+
+  // Hash password sebelum menyimpannya di database
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  try {
+    const result = await client.query(
+      'INSERT INTO pengguna ( username, password) VALUES ($1, $2) RETURNING id_admin',
+      [username, hashedPassword]
+    );
+
+    res.status(201).json({ message: 'Pendaftaran Berhasil' });
+  } catch (error) {
+    console.error('Error during registration:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 // Rute untuk mengedit data dalam tabel barang
 router.put('/ubahdataadmin/:id', (req, res) => {
@@ -78,5 +99,39 @@ router.delete('/hapusdataadmin/:id', (req, res) => {
       res.status(500).json({ error: 'Kesalahan saat menghapus data' });
     });
 });
+
+
+
+
+// Endpoint untuk login Admin
+router.post('/loginadmin', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const result = await client.query(
+      'SELECT * FROM pengguna WHERE username = $1',
+      [username]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(401).send('Invalid credentials');
+    }
+
+    const user = result.rows[0];
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).send('Invalid credentials');
+    }
+
+    const token = jwt.sign({ userId: user.id_admin }, 'coba');
+
+    res.json({ token });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 module.exports = router;

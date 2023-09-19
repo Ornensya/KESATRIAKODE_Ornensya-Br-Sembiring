@@ -1,9 +1,30 @@
 const { json } = require('body-parser');
-const {
-  Router
-} = require('express');
+const { Router} = require('express');
 const client = require('../../koneksi.js');
 const router = Router();
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const app = require('../../app.js');
+
+
+// Middleware untuk memeriksa token
+function authenticateToken(req, res, next) {
+  const token = req.header('Authorization'); // Anda bisa mengirim token dalam header 'Authorization'
+  // const token = req.body.token;
+
+  if (!token) {
+    return res.status(401).json({ message: 'Akses ditolak. Token tidak ada.' });
+  }
+
+  jwt.verify(token, 'coba', (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: 'Akses ditolak. Token tidak valid.' });
+    }
+    req.user = user;
+    console.log(user);
+    next(); // Lanjutkan ke middleware atau handler berikutnya
+  });
+}
 
 // Rute untuk menjalankan kueri ke database
 router.get('/ambildatakeranjang', (req, res) => {
@@ -17,7 +38,7 @@ router.get('/ambildatakeranjang', (req, res) => {
       });
   });
 
-  router.post('/tambahdatakeranjang', (req, res) => {
+  router.post('/tambahdatakeranjang', authenticateToken, (req, res) => {
     const { nama_produk, harga_produk, jumlah } = req.body;
   
     // Lakukan validasi data jika diperlukan
@@ -38,7 +59,7 @@ router.get('/ambildatakeranjang', (req, res) => {
   });
 
 // Rute untuk mengedit data dalam tabel barang
-router.put('/ubahdatakeranjang/:id', (req, res) => {
+router.put('/ubahdatakeranjang/:id', authenticateToken, (req, res) => {
     const { nama_produk, harga_produk, jumlah } = req.body;
     const id = req.params.id; // Ambil ID barang dari parameter URL
   
@@ -60,7 +81,7 @@ router.put('/ubahdatakeranjang/:id', (req, res) => {
   });
 
   // Rute untuk menghapus data dalam tabel barang
-router.delete('/hapusdatakeranjang/:id', (req, res) => {
+router.delete('/hapusdatakeranjang/:id', authenticateToken, (req, res) => {
   const id = req.params.id; // Ambil ID barang dari parameter URL
 
   // Lakukan validasi data jika diperlukan
