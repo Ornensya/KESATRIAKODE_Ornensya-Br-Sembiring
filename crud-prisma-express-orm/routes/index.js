@@ -10,18 +10,43 @@ router.get('/', function(req, res, next) {
 
   //Read Data Barang
 router.get('/barang', async (req, res) => {
-  const barang = await prisma.barang.findMany({
+const {
+  search
+} = req.query;
+let barang;
+if (search) {
+
+  barang = await prisma.barang.findMany({
     select:{
       id:true,
       nama:true,
       harga:true,
       stok:true
     },
+    where : {
+      nama : {
+        startsWith : `%${search}%`,
+        mode: 'insensitive'
+        // endsWith : `%${search}%`
+      }
+    },
     orderBy: {
       id:'asc'
     }
   });
-
+}else {
+  barang = await prisma.barang.findMany({
+    select: {
+      id: true,
+      nama: true,
+      harga: true,
+      stok: true
+    },
+    orderBy: {
+      id: 'asc'
+    }
+  });
+}
   const data = barang.map((item) => {
     return{
       id: Number(item.id),
@@ -33,6 +58,31 @@ router.get('/barang', async (req, res) => {
 
   return res.status(200).json({
     data
+  })
+});
+
+// Menampilkan data barang berdasarkan ID
+router.get('/barang/:id', async (req, res) => {
+  const {id} = req.params; // Ambil ID dari parameter URL
+  const barang = await prisma.barang.findFirst({
+    select:{
+      id:true,
+      nama:true,
+      harga:true,
+      stok:true
+    },
+    where: {
+      id:id
+    }
+  });
+
+  return res.status(200).json({
+    data:barang? {
+      id: Number(barang.id),
+      nama: barang.nama,
+      harga: Number(barang.harga),
+      stok: Number(barang.stok),
+    } : {}
   })
 });
 
@@ -58,8 +108,8 @@ router.post('/barang', async (req, res) => {
   })
 });
 
-// Update Data Barang
 
+// Update Data Barang
 router.put('/barang/:id', async (req, res) => {
   const id = parseInt(req.params.id); // Ambil ID dari parameter URL
   const {
@@ -81,8 +131,8 @@ router.put('/barang/:id', async (req, res) => {
   })
 });
 
-//Delete Data Barang
 
+//Delete Data Barang
 router.delete('/deletebarang/:id', async(req, res) => {
   const id = parseInt(req.params.id); // Ambil ID dari parameter URL
   await prisma.barang.delete({
