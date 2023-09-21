@@ -1,0 +1,10 @@
+<% if(error.length > 0) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul>
+            <% error.forEach((item) => { %>
+                <li><%= item.path %> <%= item.msg %></li>
+            <% }) %>
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+     </div>
+<% } %>

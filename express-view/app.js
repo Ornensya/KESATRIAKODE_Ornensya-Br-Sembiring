@@ -4,6 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const flash = require('connect-flash');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
@@ -18,6 +20,14 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended : false}));
 
 app.use(bodyParser.json());
+
+app.use(session({
+  secret: 'ornenelma',
+  saveUninitialized: true,
+  resave: true
+}));
+
+app.use(flash());
 
 app.use(logger('dev'));
 app.use(express.json());
