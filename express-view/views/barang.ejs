@@ -24,14 +24,10 @@
                      <% } %> -->
         
                       
-                     <nav class="navbar bg-body-tertiary">
-                        <div class="container-fluid">
-                            <form action="/barang" method="GET">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                          </form>
-                        </div>
-                      </nav>
+                     <form class="form-inline float-right" method="GET">
+                        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+                    </form>
                 <table class="table">
                     <form action="/barang" method="GET">
                     <tr>

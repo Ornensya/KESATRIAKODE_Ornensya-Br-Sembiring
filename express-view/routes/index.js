@@ -10,24 +10,60 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 
-router.get("/barang", async (req, res) => {
-  const judul = "shdjadjhjashjda";
-  const barang = await prisma.barang.findMany({
-    select: {
-      id: true,
-      nama: true,
-      stok: true,
-      harga: true,
-    },
-    orderBy: {
-      id: "asc",
-    },
+router.get('/barang', async (req, res) => {
+  const page = req.query.page || 1; // Halaman yang diminta (default: 1)
+  const perPage = 5; // Jumlah item per halaman
+
+  const searchQuery = req.query.search;
+  let barang;
+
+  const whereCondition = searchQuery ? {
+      nama:{
+        startsWith: `${searchQuery}`,
+        mode: 'insensitive'
+      },
+    }
+    : {};
+
+  const totalItems = await prisma.barang.count({
+    where: whereCondition,
   });
 
-  res.render("barang", {
-    judul,
+  if (searchQuery) {
+    barang = await prisma.barang.findMany({
+      select: {
+        id: true,
+        nama: true,
+        harga: true,
+        stok: true,
+      },
+      where: whereCondition,
+      orderBy: {
+        id: 'asc',
+      },
+      skip: (page - 1) * perPage, // Menghitung offset
+      take: perPage, // Jumlah item per halaman
+    });
+  }else {
+    barang = await prisma.barang.findMany({
+       select: {
+        id: true,
+        nama: true,
+        stok: true,
+        harga: true,
+       },
+       orderBy: {
+         id: "asc",
+       },
+       skip: (page - 1) * perPage, // Menghitung offset
+       take: perPage, // Jumlah item per halaman
+     });
+  }
+  res.render('barang', {
     barang,
-    success: req.flash("success"),
+    success: req.flash('success'),
+    currentPage: parseInt(page),
+    totalPages: Math.ceil(totalItems / perPage), // Menghitung total halaman
   });
 });
 
